@@ -3,13 +3,33 @@
 #include <string.h>
 #include <sys/wait.h>
 
+int read_line(int fd, char *buf, int maxlen) {
+        int i = 0;
+        char c;
+        while (i < maxlen - 1) {
+                ssize_t n = read(fd, &c, 1);
+                if (n == 0) break;
+                buf[i++] = c;
+                if (c == '\n') break;
+        }
+        buf[i] = '\0';
+        if (i > 0 && buf[i - 1] == '\n') {
+                buf[i - 1] = '\0';
+        }
+        return i;
+}
+
 int main() {
         int pipe1[2];
         int pipe2[2];
         pid_t pid1;
         pid_t pid2;
         char input[256];
-        int lineNum = 1;
+        char file1[256], file2[256];
+        int line = 1;
+        
+        if (read_line(STDIN_FILENO, file1, 256) == 0) _exit(1);
+        if (read_line(STDIN_FILENO, file2, 256) == 0) _exit(1);
 
         pipe(pipe1);
         pipe(pipe2);
@@ -19,7 +39,7 @@ int main() {
                 close(pipe1[1]);
                 dup2(pipe1[0], STDIN_FILENO);
                 close(pipe1[0]);
-                execlp("./child1", "child1", NULL);
+                execlp("./child1", "child1", file1, NULL);
                 _exit(1);
         }
 
@@ -28,7 +48,7 @@ int main() {
                 close(pipe2[1]);
                 dup2(pipe2[0], STDIN_FILENO);
                 close(pipe2[0]);
-                execlp("./child2", "child2", NULL);
+                execlp("./child2", "child2", file2, NULL);
                 _exit(1);
         }
 
@@ -42,13 +62,21 @@ int main() {
                 if (n == 0) break;
                 input[i++] = c;
                 if (c == '\n'){
-                        if (lineNum % 2 == 1) {
+                        if (line % 2 == 1) {
                                 write(pipe1[1], input, i);
                         } else {
                                 write(pipe2[1], input, i);
                         }
                         i = 0;
-                        lineNum++;
+                        line++;
+                }
+        }
+
+        if (i > 0) {
+                if (line % 2 == 1) {
+                        write(pipe1[1], input, i);
+                } else { 
+                        write(pipe2[1], input, i);
                 }
         }
         close(pipe1[1]);

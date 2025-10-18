@@ -3,22 +3,26 @@
 #include <string.h>
 #include <fcntl.h>
 
+
 void reverse(char *s, int len){
-        int end;
-        if (s[len - 1] == '\n') {
-                end = len - 2;
-        } else {
-                end = len - 1;
+        if (len <= 0) return;
+        int end = len - 1;
+        if (s[end] == '\n') {
+                end--;
         }
-        for (int i =0; i < end / 2; i++) {
+        if (end < 0) return;
+        int swaps = (end + 1) / 2;
+        for (int i = 0; i < swaps; i++) {
                 char tmp = s[i];
                 s[i] = s[end - i];
                 s[end - i] = tmp;
         }
 }
 
-int main() {
-        int fd = open("child2_out.txt", O_WRONLY | O_CREAT | O_TRUNC, 0644);
+int main(int argc, char *argv[]) {
+        if (argc < 2) _exit(1);
+
+        int fd = open(argv[1], O_WRONLY | O_CREAT | O_TRUNC, 0644);
         if (fd < 0) _exit(2);
 
         char buf[256];
@@ -32,6 +36,11 @@ int main() {
                         write(fd, buf, i);
                         i = 0;
                 }
+        }
+
+        if (i > 0) {
+                reverse(buf, i);
+                write(fd, buf, i);
         }
         close(fd);
         return 0;
