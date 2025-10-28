@@ -1,13 +1,13 @@
 cmake_minimum_required(VERSION 3.10)
-project(lab1)
+project(lab2)
 
 set(CMAKE_C_STANDARD 99)
 set(CMAKE_C_STANDARD_REQUIRED ON)
 
-add_executable(main
-        ../src/main.c
-        ../src/variable_num_of_args.c
+set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pthread")
+
+add_executable(array_sum 
+    ../main.c
 )
 
-target_include_directories(main PRIVATE include)
-target_link_libraries(main m)
+target_compile_options(array_sum PRIVATE -Wall -Wextra -Wpedantic)

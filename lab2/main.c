@@ -40,7 +40,7 @@ void sequential_func(double **arrays, double *result, int array_count, int array
 
 int main(int argc, char **argv) {
     if (argc != 4) {
-        printf("Использование: ./main <количество_массивов> <размер_массивов> <количество_потоков>\n");
+        printf("Использование: ./array_sum <количество_массивов> <размер_массивов> <количество_потоков>\n");
         return 1;
     }
 
