@@ -1,2 +1,19 @@
+# CMake build directories
 build/
 */build/
+
+# Compiled object files
+*.o
+*.obj
+
+# Executables
+*.exe
+*.out
+*.app
+
+# Libraries
+*.so
+*.dylib
+*.a
+*.lib
+
