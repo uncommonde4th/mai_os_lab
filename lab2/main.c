@@ -4,18 +4,22 @@
 #include <unistd.h>
 #include <string.h>
 #include <time.h>
+#include "array_sum.h"
+
+#define PER_THREAD 1000
+#define MAX_THREADS 16
 
 
-typedef struct {
+/*typedef struct {
     int array_count;
     int array_size;
     double **arrays;
     double *result;
     int start_index;
     int end_index;
-} ThreadArgs;
+} ThreadArgs;*/
 
-void *thread_func(void *arguments) {
+/*void *thread_func(void *arguments) {
     ThreadArgs *args = (ThreadArgs*)arguments;
 
     for (int i = args->start_index; i < args->end_index; i++) {
@@ -36,7 +40,7 @@ void sequential_func(double **arrays, double *result, int array_count, int array
             result[i] += arrays[j][i];
         }
     }
-}
+}*/
 
 int main(int argc, char **argv) {
     if (argc != 4) {

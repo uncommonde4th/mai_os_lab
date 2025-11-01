@@ -7,7 +7,15 @@ set(CMAKE_C_STANDARD_REQUIRED ON)
 set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pthread")
 
 add_executable(array_sum 
-    ../main.c
+    main.c
+    utils.c
 )
 
 target_compile_options(array_sum PRIVATE -Wall -Wextra -Wpedantic)
+
+add_executable(adaptive_sum 
+    adaptive_sum.c
+    utils.c
+)
+
+target_compile_options(adaptive_sum PRIVATE -Wall -Wextra -Wpedantic)
