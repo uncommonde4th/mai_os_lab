@@ -99,14 +99,16 @@ int main(int argc, char **argv) {
             break;
         }
     }
-    
+    /*
     printf("Количество массивов: %d\n", array_count);
     printf("Размер массивов: %d\n", array_size);
     printf("Количество потоков: %d\n", threads_count);
+    */
     printf("Последовательная версия: %.2f мс\n", sequential_time);
     printf("Параллельная версия: %.2f мс\n", parallel_time);
     printf("Ускорение: %.2f раз\n", sequential_time / parallel_time);
-    printf("Результаты: %s\n", match ? "совпадают" : "не совпадают");
+    printf("Эффективность: %.5f\n", (sequential_time / parallel_time) / threads_count);
+    // printf("Результаты: %s\n", match ? "совпадают" : "не совпадают");
     
     for (int i = 0; i < array_count; i++) {
         free(arrays[i]);
