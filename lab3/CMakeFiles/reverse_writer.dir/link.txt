@@ -1,0 +1,1 @@
+/usr/bin/cc -Wl,--dependency-file=CMakeFiles/reverse_writer.dir/link.d CMakeFiles/reverse_writer.dir/reverse_writer.c.o -o reverse_writer

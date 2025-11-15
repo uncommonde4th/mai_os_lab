@@ -1,0 +1,4 @@
+/home/uncommonde4th/Projects/mai_os_lab/lab3/CMakeFiles/main.dir
+/home/uncommonde4th/Projects/mai_os_lab/lab3/CMakeFiles/reverse_writer.dir
+/home/uncommonde4th/Projects/mai_os_lab/lab3/CMakeFiles/edit_cache.dir
+/home/uncommonde4th/Projects/mai_os_lab/lab3/CMakeFiles/rebuild_cache.dir
