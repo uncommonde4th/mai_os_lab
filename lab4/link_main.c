@@ -44,8 +44,10 @@ int main() {
             dx = atof(input_buff);
 
             float result = cos_derivative(a, dx);
-            write_str("\nРезультат: ");
-            write_float(result);
+            if (result) {
+                write_str("\nРезультат: ");
+                write_float(result);
+            }
             write_str("\n");
         } else if (cmd == 2) {
             int x;
@@ -56,8 +58,10 @@ int main() {
             x = atoi(input_buff);
 
             char *result = convert(x);
-            write_str("\nРезультат: ");
-            write_str(result);
+            if (result == NULL) {
+                write_str("\nРезультат: ");
+                write_str(result);
+            }
             write_str("\n");
         } else {
             write_str("Неизвестная команда");
