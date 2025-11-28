@@ -58,7 +58,7 @@ int main() {
             x = atoi(input_buff);
 
             char *result = convert(x);
-            if (result == NULL) {
+            if (result != NULL) {
                 write_str("\nРезультат: ");
                 write_str(result);
             }
